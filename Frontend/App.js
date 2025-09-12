@@ -33,11 +33,14 @@ function LoginScreen({ navigation }) {
         }}>¿Has olvidado tu contraseña?</Text>
 
 
-
-          <TouchableOpacity style={styles.boton}>
-              <Text style={styles.botonTexto} onPress={navigation.navigate('Perfil')}>Siguiente</Text>
+          <TouchableOpacity
+              style={styles.boton}
+              onPress={() => navigation.navigate('Perfil')}
+          >
+              <Text style={styles.botonTexto}>Siguiente</Text>
           </TouchableOpacity>
-        />
+
+
         <Text style={{
         flex:0,
         marginVertical:5,
@@ -101,4 +104,13 @@ const styles = StyleSheet.create({
 
 
   },
+
+    boton: {
+    backgroundColor: 'red',
+        padding: 15,
+        borderRadius: 8,
+        marginTop: 20,
+        alignItems: 'center',
+},
+        botonTexto: { color: '#fff', fontWeight: 'bold' },
 });
