@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 import ProfileScreen from './views/profile';
+import SettingsScreen from './views/settings';
 
 function LoginScreen({ navigation }) {
   return (
@@ -48,6 +49,14 @@ function LoginScreen({ navigation }) {
         }}>
           ─── O inicia sesión con ───
         </Text>
+        //ir a ajustes 
+          <TouchableOpacity
+              style={styles.boton}
+              onPress={() => navigation.navigate('Ajustes')}
+          >
+              <Text style={styles.botonTexto}>Ajustes</Text>
+          </TouchableOpacity>
+
       </SafeAreaView>
     </View>
   );
@@ -60,6 +69,7 @@ export default function App() {
         <Stack.Navigator initialRouteName="Login">
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Perfil" component={ProfileScreen} />
+          <Stack.Screen name="Ajustes" component={SettingsScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
@@ -69,7 +79,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#eeeeeeff',
+    backgroundColor: '#dddbd1',
     alignItems: 'center',
     justifyContent: 'flex-start', // empezamos desde arriba
     paddingTop: 60, // espacio desde el borde superior
@@ -91,26 +101,26 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 10,
-    color: '#333',
+    color: '#111114',
     backgroundColor: '#fff',
     alignSelf: 'center',
     textAlignVertical: 'top', // Android: alinea texto arriba
   },
   subtitle: {
-    color: '#666',
+    color: '#30383a',
     fontSize: 13,
     textAlign: 'center',
     marginVertical: 20,
-
-
   },
-
     boton: {
-    backgroundColor: 'red',
-        padding: 15,
-        borderRadius: 8,
-        marginTop: 20,
-        alignItems: 'center',
+      backgroundColor: '#ef2b2d',
+      padding: 15,
+      borderRadius: 8,
+      marginTop: 20,
+      alignItems: 'center',
 },
-        botonTexto: { color: '#fff', fontWeight: 'bold' },
+    botonTexto: {
+      color: '#fff',
+      fontWeight: 'bold'
+},
 });
