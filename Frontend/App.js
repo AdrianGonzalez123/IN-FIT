@@ -8,6 +8,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 import ProfileScreen from './views/profile';
 import SettingsScreen from './views/settings';
+import ForgotPassword from './views/forgot_password';
+import VerificationScreen from './views/verificacion';
 
 function LoginScreen({ navigation }) {
   return (
@@ -28,10 +30,12 @@ function LoginScreen({ navigation }) {
         />
 
 
-        <Text style={{
-        flex: 0,
-        marginBottom:30,
-        }}>¿Has olvidado tu contraseña?</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
+          <Text style={{ marginBottom: 30, color: '#007AFF' }}>
+            ¿Has olvidado tu contraseña?
+          </Text>
+        </TouchableOpacity>
+
 
 
           <TouchableOpacity
@@ -49,13 +53,7 @@ function LoginScreen({ navigation }) {
         }}>
           ─── O inicia sesión con ───
         </Text>
-        //ir a ajustes 
-          <TouchableOpacity
-              style={styles.boton}
-              onPress={() => navigation.navigate('Ajustes')}
-          >
-              <Text style={styles.botonTexto}>Ajustes</Text>
-          </TouchableOpacity>
+
 
       </SafeAreaView>
     </View>
@@ -70,6 +68,9 @@ export default function App() {
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Perfil" component={ProfileScreen} />
           <Stack.Screen name="Ajustes" component={SettingsScreen} />
+          <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+          <Stack.Screen name="Verificacion" component={VerificationScreen} />
+
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
