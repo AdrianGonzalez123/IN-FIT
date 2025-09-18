@@ -14,6 +14,8 @@ import VerificationScreen from './views/verificacion';
 import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from './firebaseConfig';
+import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
+import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 
 function LoginScreen({ navigation }) {
 
@@ -21,7 +23,9 @@ function LoginScreen({ navigation }) {
   const [password, setPassword] = React.useState('');
 
   const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+  const auth = getAuth(app, {
+  persistence: getReactNativePersistence(ReactNativeAsyncStorage)
+  });
 
   //function to create an account with email and password
   const handleCreateAccount = () => {
@@ -34,6 +38,7 @@ function LoginScreen({ navigation }) {
       .catch(error => {
         console.error(error);
       });
+    }
 
   return (
     <View style={styles.container}>
@@ -52,21 +57,18 @@ function LoginScreen({ navigation }) {
           placeholder="Contraseña"
         />
 
-
         <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
           <Text style={{ marginBottom: 30, color: '#007AFF' }}>
             ¿Has olvidado tu contraseña?
           </Text>
         </TouchableOpacity>
 
-
-
-          <TouchableOpacity
-              style={styles.boton}
-              onPress={() => navigation.navigate('Perfil')}
-          >
-              <Text style={styles.botonTexto}>Siguiente</Text>
-          </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.boton}
+          onPress={() => navigation.navigate('Perfil')}
+        >
+          <Text style={styles.botonTexto}>Siguiente</Text>
+        </TouchableOpacity>
 
 
         <Text style={{
@@ -77,11 +79,11 @@ function LoginScreen({ navigation }) {
           ─── O inicia sesión con ───
         </Text>
 
-
       </SafeAreaView>
     </View>
   );
 }
+
 
 export default function App() {
   return (
