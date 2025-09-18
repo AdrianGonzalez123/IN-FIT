@@ -11,7 +11,30 @@ import SettingsScreen from './views/settings';
 import ForgotPassword from './views/forgot_password';
 import VerificationScreen from './views/verificacion';
 
+import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { initializeApp } from 'firebase/app';
+import { firebaseConfig } from './firebaseConfig';
+
 function LoginScreen({ navigation }) {
+
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  //function to create an account with email and password
+  const handleCreateAccount = () => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(() => { 
+        console.log('Account created!');
+        const user = userCredential.user;
+        console.log(user)
+      })
+      .catch(error => {
+        console.error(error);
+      });
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
