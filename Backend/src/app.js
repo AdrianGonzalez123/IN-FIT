@@ -20,5 +20,7 @@ app.get('/', (req, res) => {
 
 // ruta para api de usuarios
 app.use('/api/usuarios', require('./routes/users.routes'));
+app.use('/api/freeusuarios', require('./routes/freeUsers'));
+app.use('/api/premiumusuarios', require('./routes/userspremium'));
 
 module.exports = app;
