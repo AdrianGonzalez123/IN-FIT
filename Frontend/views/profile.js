@@ -52,8 +52,9 @@ const ProfileScreen = () => {
                     value={peso}
                     onChangeText={setPeso}
                     keyboardType="numeric"
-                    placeholder="Peso (kg)"
+                    placeholder="Peso"
                 />
+                <Text style={styles.unit}>kg</Text>
                 <View style={styles.alturaContainer}>
                     <TextInput
                         style={[styles.input, styles.inputSmall]}
@@ -88,8 +89,8 @@ const ProfileScreen = () => {
 };
 
 const styles = StyleSheet.create({
-    container: { padding: 20 },
-    label: { fontSize: 16, marginTop: 10 },
+    container: { padding: 20, backgroundColor: '#ddddbd1' },
+    label: { fontSize: 16, marginTop: 10},
     input: {
         borderWidth: 1,
         borderColor: '#ccc',
@@ -97,6 +98,7 @@ const styles = StyleSheet.create({
         padding: 10,
         marginTop: 5,
         height: 40,
+        backgroundColor: '#fff',
     },
     inputSmall: {
         width: 100,
@@ -116,7 +118,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginVertical: 10,
-        width:250,
     },
     sexoBtn: {
         padding: 10,
@@ -124,9 +125,10 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         width: '48%',
         alignItems: 'center',
+        backgroundColor: '#fff',
     },
     sexoActivo: { backgroundColor: '#fdd' },
-    picker: { marginTop: 5 },
+    picker: { marginTop: 5 , backgroundColor: '#fff' },
     objetivoContainer: {
         borderWidth: 1,
         borderColor: '#ccc',
@@ -135,13 +137,14 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
     },
     boton: {
-        backgroundColor: 'red',
+        backgroundColor: '#ef2b2d',
         padding: 15,
         borderRadius: 8,
         marginTop: 20,
         alignItems: 'center',
     },
     botonTexto: { color: '#fff', fontWeight: 'bold' },
+    unit: { marginRight: 15 },
 });
 
 export default ProfileScreen;

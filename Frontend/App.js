@@ -7,9 +7,40 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 import ProfileScreen from './views/profile';
-import './firebase'; // Esto inicializa Firebase en el navegador
+
+import SettingsScreen from './views/settings';
+import ForgotPassword from './views/forgot_password';
+import VerificationScreen from './views/verificacion';
+
+import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { initializeApp } from 'firebase/app';
+import { firebaseConfig } from './firebaseConfig';
+import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
+import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 
 function LoginScreen({ navigation }) {
+
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app, {
+  persistence: getReactNativePersistence(ReactNativeAsyncStorage)
+  });
+
+  //function to create an account with email and password
+  const handleCreateAccount = () => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(() => { 
+        console.log('Account created!');
+        const user = userCredential.user;
+        console.log(user)
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    }
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -27,19 +58,18 @@ function LoginScreen({ navigation }) {
           placeholder="Contraseña"
         />
 
+        <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
+          <Text style={{ marginBottom: 30, color: '#007AFF' }}>
+            ¿Has olvidado tu contraseña?
+          </Text>
+        </TouchableOpacity>
 
-        <Text style={{
-        flex: 0,
-        marginBottom:30,
-        }}>¿Has olvidado tu contraseña?</Text>
-
-
-          <TouchableOpacity
-              style={styles.boton}
-              onPress={() => navigation.navigate('Perfil')}
-          >
-              <Text style={styles.botonTexto}>Siguiente</Text>
-          </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.boton}
+          onPress={() => navigation.navigate('Perfil')}
+        >
+          <Text style={styles.botonTexto}>Siguiente</Text>
+        </TouchableOpacity>
 
 
         <Text style={{
@@ -49,10 +79,12 @@ function LoginScreen({ navigation }) {
         }}>
           ─── O inicia sesión con ───
         </Text>
+
       </SafeAreaView>
     </View>
   );
 }
+
 
 export default function App() {
   return (
@@ -61,6 +93,10 @@ export default function App() {
         <Stack.Navigator initialRouteName="Login">
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Perfil" component={ProfileScreen} />
+          <Stack.Screen name="Ajustes" component={SettingsScreen} />
+          <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+          <Stack.Screen name="Verificacion" component={VerificationScreen} />
+
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
@@ -70,7 +106,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#eeeeeeff',
+    backgroundColor: '#dddbd1',
     alignItems: 'center',
     justifyContent: 'flex-start', // empezamos desde arriba
     paddingTop: 60, // espacio desde el borde superior
@@ -92,26 +128,26 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 10,
-    color: '#333',
+    color: '#111114',
     backgroundColor: '#fff',
     alignSelf: 'center',
     textAlignVertical: 'top', // Android: alinea texto arriba
   },
   subtitle: {
-    color: '#666',
+    color: '#30383a',
     fontSize: 13,
     textAlign: 'center',
     marginVertical: 20,
-
-
   },
-
     boton: {
-    backgroundColor: 'red',
-        padding: 15,
-        borderRadius: 8,
-        marginTop: 20,
-        alignItems: 'center',
+      backgroundColor: '#ef2b2d',
+      padding: 15,
+      borderRadius: 8,
+      marginTop: 20,
+      alignItems: 'center',
 },
-        botonTexto: { color: '#fff', fontWeight: 'bold' },
+    botonTexto: {
+      color: '#fff',
+      fontWeight: 'bold'
+},
 });
