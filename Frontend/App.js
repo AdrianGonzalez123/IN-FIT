@@ -30,14 +30,31 @@ function LoginScreen({ navigation }) {
   //function to create an account with email and password
   const handleCreateAccount = () => {
     createUserWithEmailAndPassword(auth, email, password)
-      .then(() => { 
+      .then((userCredential) => { 
         console.log('Account created!');
         const user = userCredential.user;
         console.log(user)
+        navigation.navigate('Perfil')
       })
       .catch(error => {
-        console.error(error);
+        console.error(error)
+        Alert.alert(error.message)
       });
+    }
+
+    //sign in function
+    const handleLogin = () => {
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          console.log('Logged in!');
+          const user = userCredential.user;
+          console.log(user)
+          navigation.navigate('Perfil')
+        })
+        .catch(error => {
+          console.error(error)
+          Alert.alert(error.message)
+        });
     }
 
   return (
@@ -48,13 +65,17 @@ function LoginScreen({ navigation }) {
         source={require('./assets/logos/logo_white_bg.svg')}
       />
       <SafeAreaView>
+
+        //text inputs
         <TextInput
           style={styles.input}
           placeholder="Usuario o e-mail"
+          onChangeText={text => setEmail(text)}
         />
         <TextInput
           style={styles.input}
           placeholder="Contraseña"
+          onChangeText={text => setPassword(text)}
         />
 
         <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
@@ -63,11 +84,21 @@ function LoginScreen({ navigation }) {
           </Text>
         </TouchableOpacity>
 
+        //buttons
+          //iniciar sesion
         <TouchableOpacity
           style={styles.boton}
-          onPress={() => navigation.navigate('Perfil')}
+          onPress={handleLogin}
         >
           <Text style={styles.botonTexto}>Siguiente</Text>
+        </TouchableOpacity>
+
+          //registrarse
+        <TouchableOpacity
+          style={styles.boton}
+          onPress={handleCreateAccount}
+        >
+          <Text style={styles.botonTexto}>Registrarse</Text>
         </TouchableOpacity>
 
 
