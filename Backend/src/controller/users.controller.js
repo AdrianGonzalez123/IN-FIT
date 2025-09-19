@@ -1,6 +1,6 @@
 const usuarioCtl = {};
 
-const Usuario = require('../models/Usuario')
+const Usuario = require('../models/Users')
 
 usuarioCtl.getUsu = async (req, res) => {
     const usuarios = await Usuario.find();
