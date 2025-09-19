@@ -1,14 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
 import { Image } from 'expo-image';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
-
+import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 
 
 export default function App() {
 
   return (
-    
+
     <View style={styles.container}>
       <StatusBar style="auto" />
       <Button
@@ -17,11 +16,11 @@ export default function App() {
         }}
         title="Press Me"
       />
-        {/*//logo*/}
-          <Image
-            style={styles.logo}
-            source={require('./assets/logos/logo_white_bg.svg')}
-          />
+      {/*//logo*/}
+      <Image
+        style={styles.logo}
+        source={require('./assets/logos/logo_white_bg.svg')}
+      />
 
       <SafeAreaProvider>
         <SafeAreaView>
@@ -55,24 +54,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
 
   },
-    logo: {
+  logo: {
     flex: 1,
     width: '10%',
     resizeMode: 'contain',
   },
-    input: {
+  input: {
     margin: 12,
     padding: 10,
     width: 300,
     fontSize: 12,
     borderWidth: 1,
-    borderColor:'#fff',
+    borderColor: '#fff',
     borderRadius: 8,
     color: '#cfcfcfff',
-    backgroundColor:'#fff',
+    backgroundColor: '#fff',
   },
-    subtitle: {
-      color: '#8a8a8aff',
-      textAlign: 'center',
-    }
+  subtitle: {
+    color: '#8a8a8aff',
+    textAlign: 'center',
+  }
 });
